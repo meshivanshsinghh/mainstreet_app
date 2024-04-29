@@ -69,6 +69,7 @@ class _RoundedButtonWidgetState extends State<RoundedButtonWidget> {
     HapticFeedback.lightImpact();
     try {
       _controller.start();
+      await _authProviderCustom.signUpWithGoogle();
     } catch (e) {
       debugPrint(e.toString());
     } finally {

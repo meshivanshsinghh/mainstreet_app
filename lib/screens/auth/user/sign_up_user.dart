@@ -251,7 +251,7 @@ class _SignUpUserState extends State<SignUpUser> {
                                       'By tapping “Continue” you agree to create an account with Travlog and to the ',
                                   style: CommonStyle.getInterFont(
                                     fontSize: 12,
-                                    color: Colors.black,
+                                    color: Colors.black54,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -275,7 +275,7 @@ class _SignUpUserState extends State<SignUpUser> {
                                   text: ' set out on our website.',
                                   style: CommonStyle.getInterFont(
                                     fontSize: 12,
-                                    color: Colors.black,
+                                    color: Colors.black54,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),

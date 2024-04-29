@@ -17,8 +17,10 @@ class _BottomNavBarCustomState extends State<BottomNavBarCustom> {
   late AuthProviderCustom authProviderCustom;
   @override
   Widget build(BuildContext context) {
-    authProviderCustom =
-        Provider.of<AuthProviderCustom>(context, listen: false);
+    authProviderCustom = Provider.of<AuthProviderCustom>(
+      context,
+      listen: false,
+    );
     return Scaffold(
       body: Center(
         child: TextButton(

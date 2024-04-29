@@ -212,21 +212,10 @@ class _SignInUserState extends State<SignInUser> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundedButtonWidget(
-                            title: 'Sign in Google',
-                            icon: FontAwesomeIcons.google,
-                            color: Color(0xffDB4437),
-                          ),
-                          SizedBox(height: 15),
-                          RoundedButtonWidget(
-                            title: 'Sign in Facebook',
-                            icon: FontAwesomeIcons.facebook,
-                            color: Colors.black,
-                          ),
-                        ],
+                      const RoundedButtonWidget(
+                        title: 'Continue with Google',
+                        icon: FontAwesomeIcons.google,
+                        color: Color(0xffDB4437),
                       ),
                     ],
                   ),

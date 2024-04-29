@@ -33,11 +33,19 @@
 				<array>
 					<string>mainstreet</string>
 					<string>app-1-795478431816-ios-313b542e777f88f881607d</string>
+					<string>com.googleusercontent.apps.795478431816-fan69std2l406pu6lvff5hag74vqoq35</string>
+					<!-- <string>fb830566562425881</string> -->
 				</array>
 			</dict>
 		</array>
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
+		<!-- <key>FacebookAppID</key>
+		<string>830566562425881</string>
+		<key>FacebookClientToken</key>
+		<string>37dde18612475f4dbdff62ca882fc588</string>
+		<key>FacebookDisplayName</key>
+		<string>Mainstreet</string> -->
 		<key>LSRequiresIPhoneOS</key>
 		<true/>
 		<key>UIApplicationSupportsIndirectInputEvents</key>

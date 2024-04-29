@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mainstreet/app.dart';
 import 'package:mainstreet/common/common_utils.dart';
 import 'package:mainstreet/helpers/app_preferences.dart';
@@ -58,7 +59,7 @@ class AuthProviderCustom extends ChangeNotifier {
       if (userCredential.user != null) {
         _uid = userCredential.user!.uid;
         notifyListeners();
-        await handleAfterAuth(userModel: UserModel());
+        await handleAfterAuth(userModel: null);
       }
     } on FirebaseAuthException catch (e) {
       CommonUtils().showSnackBar(
@@ -95,6 +96,47 @@ class AuthProviderCustom extends ChangeNotifier {
     }
   }
 
+  Future<void> signUpWithGoogle() async {
+    try {
+      UserCredential currentUserCredential = await getGoogleCredentials();
+      if (currentUserCredential.user != null) {
+        _uid = currentUserCredential.user!.uid;
+        notifyListeners();
+        AdditionalUserInfo? additionalUserInfo =
+            currentUserCredential.additionalUserInfo;
+
+        if (additionalUserInfo != null) {
+          UserModel userModel = UserModel(
+            userId: _uid,
+            profilePicture: additionalUserInfo.profile?['picture'],
+            email: additionalUserInfo.profile?['email'],
+            isMerchant: false,
+            createdAt: DateTime.now().millisecondsSinceEpoch,
+            lat: '',
+            long: '',
+            bio: '',
+            fcmToken: '',
+            name: additionalUserInfo.profile?['name'],
+          );
+          await handleAfterAuth(userModel: userModel);
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<UserCredential> getGoogleCredentials() async {
+    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAuthentication? googleAuth =
+        await googleUser?.authentication;
+    final OAuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+    return await FirebaseAuth.instance.signInWithCredential(credential);
+  }
+
   Future<bool> isNewUser({required String userId}) async {
     DocumentSnapshot dSnapshot =
         await _firebaseFirestore.collection('users').doc(userId).get();
@@ -102,11 +144,11 @@ class AuthProviderCustom extends ChangeNotifier {
   }
 
   Future<void> handleAfterAuth({
-    required UserModel userModel,
+    required UserModel? userModel,
   }) async {
     try {
       if (_uid != null) {
-        if (await isNewUser(userId: _uid!)) {
+        if (await isNewUser(userId: _uid!) && userModel != null) {
           userModel.userId = _uid;
           _firebaseFirestore
               .collection('users')
@@ -116,7 +158,6 @@ class AuthProviderCustom extends ChangeNotifier {
             getUserDataFromFirebase();
           });
         } else {
-          // existing user
           await getUserDataFromFirebase();
         }
       }
