@@ -25,7 +25,6 @@ class _SplashViewState extends State<SplashView> {
         context,
         listen: false,
       );
-
       Future.delayed(const Duration(milliseconds: 500), () => initData());
     });
   }
@@ -33,6 +32,10 @@ class _SplashViewState extends State<SplashView> {
   void initData() async {
     precacheImage(
       const AssetImage('assets/images/signin_selection_screen.png'),
+      context,
+    );
+    precacheImage(
+      const AssetImage('assets/images/signin_back.jpeg'),
       context,
     );
     if (_authProviderCustom.onboardingCompleted) {

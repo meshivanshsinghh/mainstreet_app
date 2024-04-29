@@ -6,6 +6,7 @@ import 'package:mainstreet/common/common_style.dart';
 import 'package:mainstreet/screens/auth/merchant/sign_in_merchant.dart';
 import 'package:mainstreet/screens/auth/user/sign_in_user.dart';
 import 'package:mainstreet/screens/auth/widgets/frosted_button.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignInSelectionScren extends StatefulWidget {
   static const routeName = '/welcome-page';
@@ -16,9 +17,14 @@ class SignInSelectionScren extends StatefulWidget {
 }
 
 class _SignInSelectionScrenState extends State<SignInSelectionScren> {
-  // TODO: add the logic to get the email as parameter inthis and logout the user.
+  void clearSf() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // clearSf();
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(

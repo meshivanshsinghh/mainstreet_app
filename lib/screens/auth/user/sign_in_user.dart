@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,6 +7,7 @@ import 'package:mainstreet/common/common_colors.dart';
 import 'package:mainstreet/common/common_style.dart';
 import 'package:mainstreet/common/common_utils.dart';
 import 'package:mainstreet/providers/auth_provider.dart';
+import 'package:mainstreet/screens/auth/user/sign_up_user.dart';
 import 'package:mainstreet/screens/auth/user/widgets/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +51,7 @@ class _SignInUserState extends State<SignInUser> {
                     image: const AssetImage('assets/images/signin_back.jpeg'),
                     fit: BoxFit.fill,
                     colorFilter: ColorFilter.mode(
-                        Colors.black.withOpacity(0.75), BlendMode.darken),
+                        Colors.black.withOpacity(0.8), BlendMode.darken),
                   ),
                 ),
                 child: Column(
@@ -78,13 +80,32 @@ class _SignInUserState extends State<SignInUser> {
                         children: [
                           TextSpan(
                             text:
-                                'MainStreet is your connection to the heart of your city.',
+                                "MainStreet is your connection to the heart of your city. New to MainStreet?",
                             style: CommonStyle.getInterFont(
                               color: CommonColors.whiteColor,
                               fontSize: 14,
                               height: 1.5,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w400,
                             ),
+                          ),
+                          TextSpan(
+                            text: ' Register Here',
+                            style: CommonStyle.getInterFont(
+                              color: CommonColors.whiteColor,
+                              fontSize: 14,
+                              height: 1.5,
+                              fontWeight: FontWeight.w700,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                HapticFeedback.lightImpact();
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignUpUser(),
+                                  ),
+                                );
+                              },
                           ),
                         ],
                       ),
@@ -126,6 +147,11 @@ class _SignInUserState extends State<SignInUser> {
                                 !_authProvider.isLoading
                             ? () {
                                 HapticFeedback.lightImpact();
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                _authProvider.signInUserWithEmailPassword(
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text.trim(),
+                                );
                               }
                             : () {
                                 CommonUtils().showSnackBar(
@@ -136,7 +162,7 @@ class _SignInUserState extends State<SignInUser> {
                               },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: CommonColors.primaryColor,
+                            color: CommonColors.lightPrimaryColor,
                             borderRadius: BorderRadius.circular(10),
                           ),
                           width: MediaQuery.of(context).size.width,
@@ -198,7 +224,7 @@ class _SignInUserState extends State<SignInUser> {
                           RoundedButtonWidget(
                             title: 'Sign in Facebook',
                             icon: FontAwesomeIcons.facebook,
-                            color: Color(0xff4267B2),
+                            color: Colors.black,
                           ),
                         ],
                       ),
@@ -240,7 +266,7 @@ class _SignInUserState extends State<SignInUser> {
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: CommonColors.primaryColor.withOpacity(0.5),
+        color: CommonColors.lightPrimaryColor.withOpacity(0.2),
       ),
       margin: const EdgeInsets.symmetric(vertical: 10),
       padding: const EdgeInsets.all(5),
