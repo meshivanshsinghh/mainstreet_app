@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mainstreet/common/constants.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class SignInWebView extends StatefulWidget {
-  final Function(Uri url) authCodeUrl;
+  final Function(Uri? url) authCodeUrl;
   const SignInWebView({
     super.key,
     required this.authCodeUrl,
@@ -28,7 +29,7 @@ class _SignInWebViewState extends State<SignInWebView> {
         Uri.https('connect.squareup.com', '/oauth2/authorize', {
       'client_id': clientId,
       'scope': 'MERCHANT_PROFILE_READ',
-      'state': 'https://backslashflutter.github.io/square_redirect_page',
+      'state': Constants.authRedirectUrl,
       'session': 'false',
     });
     return authorizeUrl;
@@ -48,7 +49,11 @@ class _SignInWebViewState extends State<SignInWebView> {
                 if (uri.queryParameters.containsKey('code') &&
                     uri.queryParameters['response_type'] == 'code') {
                   widget.authCodeUrl(uri);
+                } else {
+                  widget.authCodeUrl(null);
                 }
+              } else {
+                widget.authCodeUrl(null);
               }
             }
           },

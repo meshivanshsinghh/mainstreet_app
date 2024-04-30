@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mainstreet/app.dart';
 import 'package:mainstreet/common/common_utils.dart';
-import 'package:mainstreet/helpers/app_preferences.dart';
+import 'package:mainstreet/models/merchant_model.dart';
 import 'package:mainstreet/models/user_model.dart';
 import 'package:mainstreet/screens/bottom_navbar/bottom_navbar_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,32 +16,48 @@ class UserAuthProvider extends ChangeNotifier {
   bool get isSignedIn => _isSignedIn;
   UserModel? _userModel;
   UserModel? get userModel => _userModel;
+  Merchant? _merchant;
+  Merchant? get merchant => _merchant;
   bool _onboardingCompleted = false;
   bool get onboardingCompleted => _onboardingCompleted;
   String? _uid;
   String? get uid => _uid;
-  final _appPreferences = AppPreferences();
+  String? _currentAppUser;
+  String? get currentAppUser => _currentAppUser;
+
   final _firebaseFirestore = FirebaseFirestore.instance;
   final _firebaseAuth = FirebaseAuth.instance;
 
   UserAuthProvider() {
     checkSignIn();
     checkOnBoarding();
+    checkCurrentAppUser();
+  }
+
+  void checkCurrentAppUser() async {
+    _currentAppUser = await appPreferences.getCurrentAppUser();
+    notifyListeners();
   }
 
   void checkOnBoarding() async {
-    _onboardingCompleted = await _appPreferences.getOnboarding();
+    _onboardingCompleted = await appPreferences.getOnboarding();
     notifyListeners();
   }
 
   void checkSignIn() async {
-    _isSignedIn = await _appPreferences.getSignIn();
+    _isSignedIn = await appPreferences.getSignIn();
     notifyListeners();
   }
 
   Future<void> setUserModel() async {
-    UserModel? userData = await _appPreferences.getUserModel();
+    UserModel? userData = await appPreferences.getUserModel();
     _userModel = userData;
+    notifyListeners();
+  }
+
+  Future<void> setMerchantModel() async {
+    Merchant? merchant = await appPreferences.getMerchantModel();
+    _merchant = merchant;
     notifyListeners();
   }
 
@@ -110,7 +126,6 @@ class UserAuthProvider extends ChangeNotifier {
             userId: _uid,
             profilePicture: additionalUserInfo.profile?['picture'],
             email: additionalUserInfo.profile?['email'],
-            isMerchant: false,
             createdAt: DateTime.now().millisecondsSinceEpoch,
             lat: '',
             long: '',
@@ -182,8 +197,9 @@ class UserAuthProvider extends ChangeNotifier {
         await _firebaseFirestore.collection('users').doc(_uid).get();
     if (dSnapshot.exists) {
       _userModel = UserModel.fromJson(dSnapshot.data() as dynamic);
-      await _appPreferences.setUserModel(user: _userModel!);
-      await _appPreferences.setSignIn();
+      await appPreferences.setUserModel(user: _userModel!);
+      await appPreferences.setSignIn();
+      await appPreferences.setCurrentAppUser('user');
       notifyListeners();
     } else {
       userSignOut();

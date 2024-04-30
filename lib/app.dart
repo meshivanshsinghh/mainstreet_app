@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:mainstreet/helpers/app_preferences.dart';
 import 'package:mainstreet/providers/auth/merchant_auth_provider.dart';
 import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:mainstreet/screens/splash_view.dart';
 import 'package:provider/provider.dart';
 
 final GlobalKey<NavigatorState> mainNavigatorKey = GlobalKey<NavigatorState>();
+final AppPreferences appPreferences = AppPreferences();
 
 class App extends StatefulWidget {
   const App({super.key});

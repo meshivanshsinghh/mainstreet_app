@@ -44,6 +44,7 @@ dependencies:
   url_launcher:
   app_links: ^5.0.0
   webview_flutter: ^4.7.0
+  flutter_secure_storage: ^9.0.0
   # auth0_flutter: ^1.7.0
   # flutter_facebook_auth: ^6.2.0
 

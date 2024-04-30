@@ -1,3 +1,4 @@
 1. add the logic to get the email as parameter inthis and logout the user.
 2. compress the images
 3. fcm token logic.
+4. scope for auth

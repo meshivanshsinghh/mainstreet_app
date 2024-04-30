@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:mainstreet/app.dart';
 import 'package:mainstreet/common/common_colors.dart';
 import 'package:mainstreet/common/common_style.dart';
-import 'package:mainstreet/helpers/app_preferences.dart';
 import 'package:mainstreet/screens/auth/sign_in_selection_screen.dart';
 import 'package:mainstreet/screens/onboarding/slides_model.dart';
 
@@ -219,7 +219,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   void setOnBoardingDone() async {
-    final appPreferences = AppPreferences();
     await appPreferences.setOnboarding();
   }
 }

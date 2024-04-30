@@ -380,7 +380,6 @@ class _SignUpUserState extends State<SignUpUser> {
               name: _nameController.text.trim(),
               createdAt: DateTime.now().millisecondsSinceEpoch,
               email: _emailController.text.trim(),
-              isMerchant: false,
               bio: _bioController.text.trim(),
               profilePicture: '',
               fcmToken: '',

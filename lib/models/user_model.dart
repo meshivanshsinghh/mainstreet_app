@@ -5,7 +5,6 @@ class UserModel {
   int? createdAt;
   String? profilePicture;
   String? email;
-  bool? isMerchant;
   String? bio;
   String? lat;
   String? long;
@@ -17,7 +16,6 @@ class UserModel {
       this.createdAt,
       this.profilePicture,
       this.email,
-      this.isMerchant,
       this.bio,
       this.lat,
       this.long});
@@ -29,7 +27,6 @@ class UserModel {
     createdAt = json['createdAt'];
     profilePicture = json['profile_picture'];
     email = json['email'];
-    isMerchant = json['isMerchant'];
     bio = json['bio'];
     lat = json['lat'];
     long = json['long'];
@@ -43,7 +40,6 @@ class UserModel {
     data['createdAt'] = this.createdAt;
     data['profile_picture'] = this.profilePicture;
     data['email'] = this.email;
-    data['isMerchant'] = this.isMerchant;
     data['bio'] = this.bio;
     data['lat'] = this.lat;
     data['long'] = this.long;

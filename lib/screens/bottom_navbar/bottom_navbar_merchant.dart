@@ -3,7 +3,11 @@ import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavbarMerchant extends StatefulWidget {
-  const BottomNavbarMerchant({super.key});
+  final int currentIndex;
+  const BottomNavbarMerchant({
+    super.key,
+    required this.currentIndex,
+  });
 
   @override
   State<BottomNavbarMerchant> createState() => _BottomNavbarMerchantState();
@@ -23,7 +27,7 @@ class _BottomNavbarMerchantState extends State<BottomNavbarMerchant> {
           onPressed: () {
             userAuthProvider.userSignOut();
           },
-          child: Text('logout'),
+          child: Text('logout merchant'),
         ),
       ),
     );

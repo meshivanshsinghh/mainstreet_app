@@ -27,7 +27,7 @@ class _BottomNavBarUserState extends State<BottomNavBarUser> {
           onPressed: () {
             userAuthProvider.userSignOut();
           },
-          child: Text('logout'),
+          child: Text('logout user'),
         ),
       ),
     );

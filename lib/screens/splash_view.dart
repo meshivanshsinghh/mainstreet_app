@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mainstreet/common/common_colors.dart';
 import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:mainstreet/screens/auth/sign_in_selection_screen.dart';
+import 'package:mainstreet/screens/bottom_navbar/bottom_navbar_merchant.dart';
 import 'package:mainstreet/screens/bottom_navbar/bottom_navbar_user.dart';
 import 'package:mainstreet/screens/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +41,13 @@ class _SplashViewState extends State<SplashView> {
     );
     if (_userAuthProvider.onboardingCompleted) {
       if (_userAuthProvider.isSignedIn) {
-        navigateToPage(page: const BottomNavBarUser(currentIndex: 0));
+        if (_userAuthProvider.currentAppUser == 'user') {
+          _userAuthProvider.setUserModel();
+          navigateToPage(page: const BottomNavBarUser(currentIndex: 0));
+        } else {
+          _userAuthProvider.setMerchantModel();
+          navigateToPage(page: const BottomNavbarMerchant(currentIndex: 0));
+        }
       } else {
         navigateToPage(page: const SignInSelectionScren());
       }
