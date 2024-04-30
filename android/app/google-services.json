@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "795478431816",
+    "project_id": "mainstreet-28b5c",
+    "storage_bucket": "mainstreet-28b5c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795478431816:android:38ce56530d6ba9d181607d",
+        "android_client_info": {
+          "package_name": "dev.shivanshsingh.mainstreet_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795478431816-qd9fndksga9omi73h92snuvbhfv7gbg3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "dev.shivanshsingh.mainstreet_app",
+            "certificate_hash": "9ad841204e1099ad975345a816f838e7fd803dc0"
+          }
+        },
+        {
+          "client_id": "795478431816-bnrvti9b9trqm3nmu80ht0r9e39it4h4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxNAkd29ZRR3FTC8G4PZ-UHJdNR7_nFs0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795478431816-bnrvti9b9trqm3nmu80ht0r9e39it4h4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "795478431816-fan69std2l406pu6lvff5hag74vqoq35.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "dev.shivanshsingh.mainstreet-app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
