@@ -6,7 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mainstreet/common/common_colors.dart';
 import 'package:mainstreet/common/common_style.dart';
 import 'package:mainstreet/common/common_utils.dart';
-import 'package:mainstreet/providers/auth_provider.dart';
+import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:mainstreet/screens/auth/user/sign_up_user.dart';
 import 'package:mainstreet/screens/auth/user/widgets/rounded_loading_button.dart';
 import 'package:provider/provider.dart';
@@ -21,12 +21,12 @@ class SignInUser extends StatefulWidget {
 class _SignInUserState extends State<SignInUser> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  late AuthProviderCustom _authProvider;
+  late UserAuthProvider _authProvider;
   bool _togglePasswordVisibility = true;
 
   @override
   Widget build(BuildContext context) {
-    _authProvider = Provider.of<AuthProviderCustom>(context, listen: true);
+    _authProvider = Provider.of<UserAuthProvider>(context, listen: true);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(

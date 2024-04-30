@@ -6,10 +6,10 @@ import 'package:mainstreet/app.dart';
 import 'package:mainstreet/common/common_utils.dart';
 import 'package:mainstreet/helpers/app_preferences.dart';
 import 'package:mainstreet/models/user_model.dart';
-import 'package:mainstreet/screens/bottom_navbar/bottom_navbar.dart';
+import 'package:mainstreet/screens/bottom_navbar/bottom_navbar_user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class AuthProviderCustom extends ChangeNotifier {
+class UserAuthProvider extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   bool _isSignedIn = false;
@@ -24,7 +24,7 @@ class AuthProviderCustom extends ChangeNotifier {
   final _firebaseFirestore = FirebaseFirestore.instance;
   final _firebaseAuth = FirebaseAuth.instance;
 
-  AuthProviderCustom() {
+  UserAuthProvider() {
     checkSignIn();
     checkOnBoarding();
   }
@@ -169,7 +169,7 @@ class AuthProviderCustom extends ChangeNotifier {
       );
       Navigator.of(mainNavigatorKey.currentContext!).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const BottomNavBarCustom(
+          builder: (context) => const BottomNavBarUser(
             currentIndex: 0,
           ),
         ),
@@ -207,4 +207,6 @@ class AuthProviderCustom extends ChangeNotifier {
     _isLoading = loading;
     notifyListeners();
   }
+
+  Future<void> signInMerchantAccount() async {}
 }

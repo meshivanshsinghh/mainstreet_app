@@ -7,7 +7,7 @@ import 'package:mainstreet/common/common_colors.dart';
 import 'package:mainstreet/common/common_style.dart';
 import 'package:mainstreet/common/common_utils.dart';
 import 'package:mainstreet/models/user_model.dart';
-import 'package:mainstreet/providers/auth_provider.dart';
+import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:mainstreet/screens/auth/user/sign_in_user.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +24,7 @@ class _SignUpUserState extends State<SignUpUser> {
   final _dobController = TextEditingController();
   final _passwordController = TextEditingController();
   final _bioController = TextEditingController();
-  late AuthProviderCustom _authProvider;
+  late UserAuthProvider _authProvider;
   bool _togglePasswordVisibility = true;
   final _formKey = GlobalKey<FormState>();
 
@@ -40,7 +40,7 @@ class _SignUpUserState extends State<SignUpUser> {
 
   @override
   Widget build(BuildContext context) {
-    _authProvider = Provider.of<AuthProviderCustom>(context, listen: true);
+    _authProvider = Provider.of<UserAuthProvider>(context, listen: true);
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.light,
       child: Scaffold(

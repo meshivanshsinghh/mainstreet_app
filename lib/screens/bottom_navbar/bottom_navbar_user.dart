@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:mainstreet/providers/auth_provider.dart';
+import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:provider/provider.dart';
 
-class BottomNavBarCustom extends StatefulWidget {
+class BottomNavBarUser extends StatefulWidget {
   final int currentIndex;
-  const BottomNavBarCustom({
+  const BottomNavBarUser({
     super.key,
     required this.currentIndex,
   });
 
   @override
-  State<BottomNavBarCustom> createState() => _BottomNavBarCustomState();
+  State<BottomNavBarUser> createState() => _BottomNavBarUserState();
 }
 
-class _BottomNavBarCustomState extends State<BottomNavBarCustom> {
-  late AuthProviderCustom authProviderCustom;
+class _BottomNavBarUserState extends State<BottomNavBarUser> {
+  late UserAuthProvider userAuthProvider;
   @override
   Widget build(BuildContext context) {
-    authProviderCustom = Provider.of<AuthProviderCustom>(
+    userAuthProvider = Provider.of<UserAuthProvider>(
       context,
       listen: false,
     );
@@ -25,7 +25,7 @@ class _BottomNavBarCustomState extends State<BottomNavBarCustom> {
       body: Center(
         child: TextButton(
           onPressed: () {
-            authProviderCustom.userSignOut();
+            userAuthProvider.userSignOut();
           },
           child: Text('logout'),
         ),

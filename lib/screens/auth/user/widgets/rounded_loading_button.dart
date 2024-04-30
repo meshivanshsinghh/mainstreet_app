@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mainstreet/common/common_style.dart';
-import 'package:mainstreet/providers/auth_provider.dart';
+import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button_plus/rounded_loading_button.dart';
 
@@ -22,12 +22,12 @@ class RoundedButtonWidget extends StatefulWidget {
 
 class _RoundedButtonWidgetState extends State<RoundedButtonWidget> {
   final _controller = RoundedLoadingButtonController();
-  late AuthProviderCustom _authProviderCustom;
+  late UserAuthProvider _userAuthProvider;
 
   @override
   void initState() {
     super.initState();
-    _authProviderCustom = Provider.of<AuthProviderCustom>(
+    _userAuthProvider = Provider.of<UserAuthProvider>(
       context,
       listen: false,
     );
@@ -69,7 +69,7 @@ class _RoundedButtonWidgetState extends State<RoundedButtonWidget> {
     HapticFeedback.lightImpact();
     try {
       _controller.start();
-      await _authProviderCustom.signUpWithGoogle();
+      await _userAuthProvider.signUpWithGoogle();
     } catch (e) {
       debugPrint(e.toString());
     } finally {

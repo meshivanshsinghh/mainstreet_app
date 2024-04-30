@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:mainstreet/providers/auth_provider.dart';
+import 'package:mainstreet/providers/auth/merchant_auth_provider.dart';
+import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:mainstreet/screens/splash_view.dart';
 import 'package:provider/provider.dart';
 
@@ -19,8 +20,11 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<AuthProviderCustom>(
-          create: (_) => AuthProviderCustom(),
+        ChangeNotifierProvider<UserAuthProvider>(
+          create: (_) => UserAuthProvider(),
+        ),
+        ChangeNotifierProvider<MerchantAuthProvider>(
+          create: (_) => MerchantAuthProvider(),
         ),
       ],
       child: MaterialApp(

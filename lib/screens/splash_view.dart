@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mainstreet/common/common_colors.dart';
-import 'package:mainstreet/providers/auth_provider.dart';
+import 'package:mainstreet/providers/auth/user_auth_provider.dart';
 import 'package:mainstreet/screens/auth/sign_in_selection_screen.dart';
-import 'package:mainstreet/screens/bottom_navbar/bottom_navbar.dart';
+import 'package:mainstreet/screens/bottom_navbar/bottom_navbar_user.dart';
 import 'package:mainstreet/screens/onboarding/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -15,13 +15,13 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  late AuthProviderCustom _authProviderCustom;
+  late UserAuthProvider _userAuthProvider;
 
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      _authProviderCustom = Provider.of<AuthProviderCustom>(
+      _userAuthProvider = Provider.of<UserAuthProvider>(
         context,
         listen: false,
       );
@@ -38,9 +38,9 @@ class _SplashViewState extends State<SplashView> {
       const AssetImage('assets/images/signin_back.jpeg'),
       context,
     );
-    if (_authProviderCustom.onboardingCompleted) {
-      if (_authProviderCustom.isSignedIn) {
-        navigateToPage(page: const BottomNavBarCustom(currentIndex: 0));
+    if (_userAuthProvider.onboardingCompleted) {
+      if (_userAuthProvider.isSignedIn) {
+        navigateToPage(page: const BottomNavBarUser(currentIndex: 0));
       } else {
         navigateToPage(page: const SignInSelectionScren());
       }
